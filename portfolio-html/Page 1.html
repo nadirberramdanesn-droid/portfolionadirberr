@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTS SIO</title>
+
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --light: #f9fafb;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      animation: fadeUp 0.8s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 70%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    p {
+      margin: 15px 0;
+      font-size: 1.05em;
+      color: #374151;
+      text-align: justify;
+    }
+
+    ul {
+      margin: 15px 0 15px 25px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 25px auto;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: -40px 15px 60px;
+        padding: 35px 25px;
+      }
+
+      nav a {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BTS SIO</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>BTS SIO : Services Informatiques aux Organisations</h1>
+
+    <h2>Qu’est-ce que le BTS SIO ?</h2>
+    <p>
+      Reconnu par l’État, le BTS SIO a remplacé depuis 2011 le BTS IG (Informatique et Gestion).
+      Cette formation répond aux besoins croissants des entreprises en compétences informatiques
+      et se décline en deux spécialités : <strong>SISR</strong> et <strong>SLAM</strong>.
+    </p>
+    <p>
+      Elle comprend des enseignements techniques, de culture générale et de management,
+      ainsi que des périodes de stage en entreprise permettant une immersion professionnelle.
+    </p>
+
+    <h2>Option SISR : Solutions d’Infrastructure, Systèmes et Réseaux</h2>
+    <p>
+      L’option SISR forme des techniciens spécialisés dans la gestion, la maintenance
+      et la sécurisation des infrastructures réseau et systèmes d’une entreprise.
+    </p>
+
+    <h2>Option SLAM : Solutions Logicielles et Applications Métiers</h2>
+    <p>
+      L’option SLAM s’adresse aux passionnés du développement. Les étudiants apprennent
+      à concevoir, développer et maintenir des applications adaptées aux besoins des organisations.
+    </p>
+
+    <h2>Examen du BTS SIO</h2>
+    <img src="BTSSIO exam.png" alt="Examen BTS SIO">
+
+    <h2>Débouchés – Option SISR</h2>
+    <ul>
+      <li>Administrateur systèmes et réseaux</li>
+      <li>Administrateur sécurité informatique</li>
+      <li>Responsable infrastructure</li>
+      <li>Chef de projet systèmes et réseaux</li>
+      <li>Licence professionnelle réseaux et télécommunications</li>
+    </ul>
+
+    <h2>Débouchés – Option SLAM</h2>
+    <ul>
+      <li>Développeur web / mobile</li>
+      <li>Concepteur développeur d’applications</li>
+      <li>Chef de projet digital</li>
+      <li>Responsable ingénierie logicielle</li>
+      <li>Licence professionnelle développement logiciel</li>
+    </ul>
+
+  </main>
+
+</body>
+</html>

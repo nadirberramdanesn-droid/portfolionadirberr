@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 0;
+      width: 100%; height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+    main {
+      max-width: 860px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+    h1 {
+      color: var(--primary);
+      font-size: 2.2em;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .intro {
+      text-align: center;
+      color: #6b7280;
+      font-size: 1.05em;
+      margin-bottom: 44px;
+    }
+
+    /* === PROFIL === */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 48px;
+      gap: 14px;
+    }
+    .avatar-placeholder {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5em;
+      color: white;
+      font-weight: 700;
+      border: 4px solid #e0f5f5;
+      box-shadow: var(--shadow-soft);
+    }
+    .profile-name {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .profile-role {
+      font-size: 0.95em;
+      color: #6b7280;
+      margin-top: -8px;
+    }
+
+    /* === CARTES CONTACT === */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .contact-card {
+      flex: 1 1 220px;
+      background: #f9fafb;
+      border-radius: 20px;
+      padding: 30px 20px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-decoration: none;
+      color: var(--dark);
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    .contact-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    .contact-card .label {
+      font-size: 0.78em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+    .contact-card .value {
+      font-size: 0.92em;
+      color: #374151;
+      word-break: break-word;
+    }
+
+    .contact-card .arrow {
+      margin-top: 4px;
+      font-size: 1.1em;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 20px; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .contact-card { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contact</h1>
+  </header>
+
+  <nav>
+    <a href="portfolio.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Contactez-moi</h1>
+    <p class="intro">Une question, un projet ou simplement envie d'échanger ? N'hésitez pas !</p>
+
+    <!-- PROFIL -->
+    <div class="profile">
+      <div class="avatar-placeholder">NB</div>
+      <div class="profile-name">BERRAMDANE Nadir</div>
+      <div class="profile-role">Étudiant BTS SIO SLAM — Joinville-le-Pont</div>
+    </div>
+
+    <!-- CARTES CONTACT -->
+    <div class="contact-grid">
+
+      <!-- Gmail -->
+      <a href="mailto:nadir.berramdane.sn@gmail.com" class="contact-card">
+        <img src="gmaillogo.avif" alt="Gmail">
+        <span class="label">Email</span>
+        <span class="value">nadir.berramdane.sn@gmail.com</span>
+        <span class="arrow">→ Ouvrir Gmail</span>
+      </a>
+
+      <!-- Téléphone -->
+      <a href="tel:+33766384533" class="contact-card">
+        <img src="tellogo.jpg" alt="Téléphone">
+        <span class="label">Téléphone</span>
+        <span class="value">+33 7 66 38 45 33</span>
+        <span class="arrow">→ Appeler</span>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/nadir-berramdane-2517612b7/" target="_blank" class="contact-card">
+        <img src="linkedinlogo.png" alt="LinkedIn">
+        <span class="label">LinkedIn</span>
+        <span class="value">nadir-berramdane</span>
+        <span class="arrow">→ Voir le profil</span>
+      </a>
+
+    </div>
+  </main>
+
+</body>
+</html>

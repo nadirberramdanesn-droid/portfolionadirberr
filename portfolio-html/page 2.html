@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --light: #f9fafb;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 30px;
+    }
+    h2 {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 70%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+    p { margin: 15px 0; font-size: 1.05em; color: #374151; text-align: justify; }
+    ul { margin: 15px 0; padding: 0; list-style: none; }
+    li { margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+
+    .mission-title {
+      font-weight: 700;
+      font-size: 1em;
+      color: var(--dark);
+    }
+
+    .mission-subtitle {
+      display: block;
+      font-size: 0.92em;
+      color: #6b7280;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    a.download {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9em;
+    }
+    a.download:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    button.preview {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 8px 16px;
+      border: 2px solid var(--primary);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+    button.preview:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Galerie */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 14px 0 10px;
+    }
+    .gallery img {
+      flex: 1 1 160px;
+      width: calc(33.333% - 8px);
+      height: 160px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+      cursor: zoom-in;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 2px solid transparent;
+    }
+    .gallery img:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    /* Lightbox image */
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex !important; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+      cursor: default;
+    }
+
+    /* Visionneuse PDF */
+    #pdf-viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #pdf-viewer.active { display: flex !important; }
+    #pdf-viewer iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+    }
+
+    .viewer-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10000;
+      line-height: 1;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 25px; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .gallery img { height: 120px; }
+      #pdf-viewer iframe { height: 75vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mes Projets</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+
+    <h2>MDL (Maison Des Ligues)</h2>
+    <ul>
+
+      <li>
+        <span class="mission-title">MISSION 1</span>
+        <span class="mission-subtitle">Étude et analyse du contexte</span>
+        <div class="gallery">
+          <img src="Tableau_MDL_page-0001.jpg" alt="Mission 1 - Étude et analyse du contexte" onclick="openLightbox(this)">
+        </div>
+        <div class="btn-row">
+          <a href="Tableau_MDL.pdf" download class="download">⬇ Télécharger</a>
+          <button class="preview" onclick="openPDF('Tableau_MDL.pdf')">👁 Aperçu PDF</button>
+        </div>
+      </li>
+
+      <li>
+        <span class="mission-title">MISSION 2</span>
+        <span class="mission-subtitle">Étude de l'existant du SI</span>
+        <div class="gallery">
+          <img src="mission 2 mdl-converted-from-png.jpeg" alt="Mission 2 - Étude de l'existant du SI" onclick="openLightbox(this)">
+        </div>
+        <div class="btn-row">
+          <a href="mission 2 mdl-converted-from-png.jpeg" download class="download">⬇ Télécharger</a>
+          <button class="preview" onclick="openLightbox(document.querySelector('[alt=\'Mission 2 - Étude de l\\\'existant du SI\']'))">👁 Aperçu</button>
+        </div>
+      </li>
+
+      <li>
+        <span class="mission-title">MISSION 3</span>
+        <span class="mission-subtitle">Étude du projet réservation des salles</span>
+        <div class="gallery">
+          <img src="Mission_3_Julien_et_Nadir_page-0001.jpg" alt="Mission 3 - Page 1" onclick="openLightbox(this)">
+          <img src="Mission_3_Julien_et_Nadir_page-0002.jpg" alt="Mission 3 - Page 2" onclick="openLightbox(this)">
+        </div>
+        <div class="btn-row">
+          <a href="Mission_3_Julien_et_Nadir.pdf" download class="download">⬇ Télécharger</a>
+          <button class="preview" onclick="openPDF('Mission_3_Julien_et_Nadir.pdf')">👁 Aperçu PDF</button>
+        </div>
+      </li>
+
+      <li>
+        <span class="mission-title">MISSION 4</span>
+        <span class="mission-subtitle">Gestion du projet réservation des salles</span>
+        <div class="gallery">
+          <img src="Mission_4_Julien_et_Nadir_page-0001.jpg" alt="Mission 4 - Diagramme de Gantt" onclick="openLightbox(this)">
+        </div>
+        <div class="btn-row">
+          <a href="Mission_4_Julien_et_Nadir.pdf" download class="download">⬇ Télécharger</a>
+          <button class="preview" onclick="openPDF('Mission_4_Julien_et_Nadir.pdf')">👁 Aperçu PDF</button>
+        </div>
+      </li>
+
+    </ul>
+
+    <h2>Projet technique SLAM</h2>
+    <ul>
+      <li>
+        <strong>Catamarans</strong><br/>
+        <a href="catamaran" download class="download">⬇ Télécharger catamaran</a>
+        <div class="gallery">
+          <img src="site catamarans screen.jpg" alt="Site Catamarans" onclick="openLightbox(this)">
+          <img src="screen catamaran bdd.jpg" alt="BDD Catamaran" onclick="openLightbox(this)">
+          <img src="screen vs code catamarans.jpg" alt="VS Code Catamarans" onclick="openLightbox(this)">
+        </div>
+      </li>
+      <li>
+        <strong>Aventure Alpine</strong><br/>
+        <a href="aventures-alpines-master" download class="download">⬇ Télécharger Aventure Alpine</a>
+        <div class="gallery">
+          <img src="bdd screen aventure alpine.jpg" alt="BDD Aventure Alpine" onclick="openLightbox(this)">
+          <img src="screen vs code aventure alpine.jpg" alt="VS Code Aventure Alpine" onclick="openLightbox(this)">
+            <img src="siteaventurealpine.png " alt="site Aventure Alpine" onclick="openLightbox(this)">
+        </div>
+      </li>
+    </ul>
+     <h2>Portefeuille de compétence</h2>
+ <ul>
+     <li>
+        <span class="mission-title"><Table>Tableau E4</Table></span>
+        <span class="mission-subtitle">Portefeuille de compétence</span>
+        <div class="gallery">
+          <img src="Tableau_E4_BERRAMDANE_Nadir_REMPLI_page-0001.jpg" alt="Mission 4 - Diagramme de Gantt" onclick="openLightbox(this)">
+        </div>
+        <div class="btn-row">
+          <a href="Tableau_E4_BERRAMDANE_Nadir_REMPLI.pdf" download class="download">⬇ Télécharger</a>
+          <button class="preview" onclick="openPDF('Tableau_E4_BERRAMDANE_Nadir_REMPLI')">👁 Aperçu PDF</button>
+        </div>
+      </li>
+ </ul>
+  </main>
+
+  <!-- Lightbox image -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="viewer-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- Visionneuse PDF -->
+  <div id="pdf-viewer" onclick="closePDF(event)">
+    <button class="viewer-close" onclick="closePDF()">&times;</button>
+    <iframe id="pdf-frame" src=""></iframe>
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+      if (!event || event.target.id !== 'lightbox-img') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function openPDF(src) {
+      document.getElementById('pdf-frame').src = src;
+      document.getElementById('pdf-viewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePDF(event) {
+      if (!event || event.target.id !== 'pdf-frame') {
+        document.getElementById('pdf-frame').src = '';
+        document.getElementById('pdf-viewer').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeLightbox(); closePDF(); }
+    });
+  </script>
+
+</body>
+</html>

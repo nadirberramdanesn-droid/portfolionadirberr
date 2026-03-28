@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CERTIFICATION</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --radius-xl: 24px;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 0;
+      width: 100%; height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+
+    nav {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      font-size: 1.05em;
+      color: #374151;
+      text-align: justify;
+      margin-bottom: 40px;
+    }
+
+    .category { margin-bottom: 50px; }
+
+    .category-title {
+      font-size: 1.4em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-title::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 6px;
+      width: 5px; height: 75%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .badge-soon {
+      font-size: 0.55em;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: white;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .cert-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cert-card {
+      flex: 1 1 180px;
+      background: #f9fafb;
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .cert-card.soon {
+      opacity: 0.6;
+      filter: grayscale(40%);
+      pointer-events: none;
+    }
+
+    .cert-card strong {
+      display: block;
+      color: var(--dark);
+      font-size: 0.88em;
+      margin-bottom: 12px;
+      min-height: 2.5em;
+      line-height: 1.3;
+    }
+
+    .cert-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 10px;
+      cursor: zoom-in;
+      border: 2px solid transparent;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+      margin-bottom: 12px;
+    }
+
+    .cert-thumb:hover {
+      border-color: var(--secondary);
+      transform: scale(1.03);
+    }
+
+    .cert-placeholder {
+      width: 100%;
+      height: 160px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      gap: 8px;
+      font-size: 2.5em;
+    }
+
+    .cert-placeholder span {
+      font-size: 0.35em;
+      color: #9ca3af;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    a.dl-btn {
+      display: inline-block;
+      padding: 7px 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85em;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    a.dl-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+
+    button.prev-btn {
+      padding: 7px 14px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button.prev-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .soon-label {
+      display: inline-block;
+      padding: 7px 20px;
+      background: #e5e7eb;
+      color: #9ca3af;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.active { display: flex !important; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+      cursor: default;
+    }
+
+    #pdf-viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pdf-viewer.active { display: flex !important; }
+
+    #pdf-viewer iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+    }
+
+    .viewer-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10000;
+      line-height: 1;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 25px; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .cert-thumb, .cert-placeholder { height: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header><h1>Certification</h1></header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Mes Certifications</h1>
+    <p class="intro">
+      Durant mon BTS SIO, j'ai pu passer quelques certifications me permettant d'acquérir de nouvelles compétences.
+      Ci-dessous, vous trouverez les certifications que j'ai obtenues au cours de mon parcours, classées par domaine.
+    </p>
+
+    <!-- ══ RGPD ══ -->
+    <div class="category">
+      <div class="category-title">🔒 RGPD</div>
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <strong>Le RGPD et ses notions clés</strong>
+          <img src="Certificat Module 1 Nadir_page-0001.jpg" alt="Module 1 - Le RGPD et ses notions clés" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="Certificat Module 1 Nadir.pdf" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openPDF('Certificat Module 1 Nadir.pdf')">👁 Aperçu</button>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <strong>Les principes de la protection des données</strong>
+          <img src="Certificat MODULE 2 Nadir_page-0001.jpg" alt="Module 2 - Les principes de la protection des données" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="Certificat MODULE 2 Nadir.pdf" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openPDF('Certificat MODULE 2 Nadir.pdf')">👁 Aperçu</button>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <strong>Les responsabilités des acteurs</strong>
+          <img src="Certificat MODULE 3 Nadir_page-0001.jpg" alt="Module 3 - Les responsabilités des acteurs" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="Certificat MODULE 3 Nadir.pdf" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openPDF('Certificat MODULE 3 Nadir.pdf')">👁 Aperçu</button>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <strong>Le DPO et les outils de la conformité</strong>
+          <img src="Certificat module 4 Nadir_page-0001.jpg" alt="Module 4 - Le DPO et les outils de la conformité" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="Certificat Module 4 Nadir.pdf" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openPDF('Certificat Module 4 Nadir.pdf')">👁 Aperçu</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ Développement Web & Gestion de Projet ══ -->
+    <div class="category">
+      <div class="category-title">💻 Développement Web & Gestion de Projet</div>
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <strong>Certification SLAM</strong>
+          <img src="Certification slam.png" alt="Certification SLAM" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="Certification slam.png" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openImage(this.closest('.cert-card').querySelector('img'))">👁 Aperçu</button>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <strong>Cybersécurité & Développement – OpenClassrooms</strong>
+          <img src="open_classeroom_badge_Nadir_BERRAMDANE.jpg" alt="Open Classroom" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="open_classeroom_badge_Nadir_BERRAMDANE.jpg" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openImage(this.closest('.cert-card').querySelector('img'))">👁 Aperçu</button>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <strong>Certification PIX</strong>
+          <img src="pix nadir.png" alt="Certification PIX" class="cert-thumb" onclick="openImage(this)">
+          <div class="btn-row">
+            <a href="pix nadir.png" class="dl-btn" download>⬇ Télécharger</a>
+            <button class="prev-btn" onclick="openImage(this.closest('.cert-card').querySelector('img'))">👁 Aperçu</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ Compétences linguistiques — BIENTÔT ══ -->
+    <div class="category">
+      <div class="category-title">
+        ✍️ Compétences linguistiques
+        <span class="badge-soon">Bientôt</span>
+      </div>
+      <div class="cert-grid">
+
+        <div class="cert-card soon">
+          <strong>Voltaire</strong>
+          <div class="cert-placeholder">
+            📝
+            <span>À venir</span>
+          </div>
+          <div class="btn-row">
+            <span class="soon-label">⏳ Bientôt disponible</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox image -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="viewer-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- Visionneuse PDF -->
+  <div id="pdf-viewer" onclick="closePDF(event)">
+    <button class="viewer-close" onclick="closePDF()">&times;</button>
+    <iframe id="pdf-frame" src=""></iframe>
+  </div>
+
+  <script>
+    function openImage(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+      if (!event || event.target.id !== 'lightbox-img') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function openPDF(src) {
+      document.getElementById('pdf-frame').src = src;
+      document.getElementById('pdf-viewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePDF(event) {
+      if (!event || event.target.id !== 'pdf-frame') {
+        document.getElementById('pdf-frame').src = '';
+        document.getElementById('pdf-viewer').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeLightbox(); closePDF(); }
+    });
+  </script>
+
+</body>
+</html>

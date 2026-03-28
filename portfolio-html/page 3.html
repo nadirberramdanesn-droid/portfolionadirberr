@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veille</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --light: #f9fafb;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 0;
+      width: 100%; height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 30px;
+    }
+    h2 {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 8px;
+      width: 5px; height: 70%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: var(--dark);
+      font-size: 1.15em;
+    }
+    p { margin: 15px 0; font-size: 1.05em; color: #374151; text-align: justify; }
+
+    /* Galerie */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .gallery img {
+      flex: 1 1 160px;
+      height: 160px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      cursor: zoom-in;
+      border: 2px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    /* Boutons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    a.dl-btn {
+      display: inline-block;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+    a.dl-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Séparateur entre les deux veilles */
+    .veille-block {
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 40px;
+      margin-bottom: 10px;
+    }
+    .veille-block:last-child {
+      border-bottom: none;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex !important; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+      cursor: default;
+    }
+    .viewer-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10000;
+      line-height: 1;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 25px; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .gallery img { height: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Veille</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Mes Veilles</h1>
+
+    <!-- VEILLE TECHNOLOGIQUE -->
+    <div class="veille-block">
+      <h2>Veille Technologique</h2>
+      <p>La veille technologique est un processus de recherche, de collecte et d'analyse d'informations sur les évolutions récentes ou à venir dans le domaine des technologies de l'information. Elle permet de suivre les tendances, d'anticiper les changements, et d'adapter ses compétences ou ses choix techniques dans un environnement numérique en constante évolution.</p>
+
+      <h3>Mon sujet : Les Ordinateurs Quantiques</h3>
+     
+      <div class="gallery">
+        <img src="Schrodingers_cat.svg" alt="NIST Cybersecurity Framework" onclick="openLightbox(this)">
+        <img src="oq_face.jpg" alt="Ordinateur Quantique" onclick="openLightbox(this)">
+      </div>
+
+      <div class="btn-row">
+        <a href="Veille technologique OQ.pdf" class="dl-btn" download>⬇ Télécharger la veille technologique</a>
+      </div>
+    </div>
+
+    <!-- VEILLE CYBERSÉCURITÉ -->
+    <div class="veille-block">
+      <h2>Veille Cybersécurité</h2>
+      <p>La veille cybersécurité consiste à collecter, analyser et surveiller les informations liées aux menaces informatiques, vulnérabilités, failles de sécurité et outils de protection. Son objectif est de prévenir les cyberattaques et de maintenir un niveau de sécurité optimal.</p>
+
+      <h3>Mon sujet : L'ordinateur quantique et la cybersécurité</h3>
+      <div class="gallery">
+        <img src="savenow-encryptlater.png" alt="Harvest now decrypt later" onclick="openLightbox(this)">
+        <img src="nistimage.webp" alt="Ordinateur Quantique" onclick="openLightbox(this)">
+      </div>
+
+      <div class="btn-row">
+        <a href="Veille cyber.odt" class="dl-btn" download>⬇ Télécharger la veille cybersécurité</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="viewer-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(event) {
+      if (!event || event.target.id !== 'lightbox-img') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>

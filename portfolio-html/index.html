@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – BERRAMDANE Nadir</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --light: #f9fafb;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 0;
+      width: 100%; height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 8px;
+      width: 5px; height: 70%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    p {
+      margin: 15px 0;
+      font-size: 1.05em;
+      color: #374151;
+      text-align: justify;
+    }
+
+    /* === SECTION CV === */
+    .cv-section {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .cv-preview {
+      display: block;
+      margin: 20px auto 0;
+      width: 220px;
+      height: 300px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
+      cursor: zoom-in;
+      border: 2px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cv-preview:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    a.download-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    a.download-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+
+    button.preview-btn {
+      padding: 12px 30px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    button.preview-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === LIGHTBOX IMAGE === */
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.active { display: flex !important; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+      cursor: default;
+    }
+
+    /* === VISIONNEUSE PDF === */
+    #pdf-viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pdf-viewer.active { display: flex !important; }
+
+    #pdf-viewer iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+    }
+
+    .viewer-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10000;
+      line-height: 1;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 25px; }
+      header h1 { font-size: 2em; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .cv-preview { width: 180px; height: 240px; }
+      #pdf-viewer iframe { height: 75vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bienvenue sur mon portfolio</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="page 3.html">Veille</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Bonjour !</h1>
+
+    <h2>À propos de moi</h2>
+    <p>
+      Je m'appelle BERRAMDANE Nadir, j'ai 19 ans. Je suis actuellement étudiant à Joinville-le-Pont
+      au Pôle STS Ensemble Sainte Marie en 2ème année de BTS SIO,
+      spécialité <strong>SLAM</strong> (Solutions Logicielles et Applications Métiers).
+    </p>
+
+    <h2>Mon parcours d'études</h2>
+    <p>
+      Après l'obtention de mon <strong>brevet des collèges</strong> en 2021, j'ai suivi un <strong>BAC PRO SN</strong>
+      de 2021 à 2024. J'ai ensuite intégré le <strong>BTS SIO SLAM</strong> en 2024 à l'Ensemble Sainte Marie
+      à Joinville-le-Pont.
+    </p>
+
+    <h2>Mes projections d'avenir</h2>
+    <p>
+      Après l'obtention de mon BTS, je suis toujours indécis entre entrer dans le monde du travail
+      ou continuer en licence professionnelle.
+    </p>
+
+    <div class="cv-section">
+      <h2>Mon Curriculum Vitae</h2>
+
+      <img
+        src="CV_2026-03-16_Nadir_BERRAMDANE-2.pdf_20260328_132350_0000_page-0001.jpg"
+        alt="Aperçu du CV"
+        class="cv-preview"
+        onclick="openLightbox(this)"
+      />
+
+      <div class="btn-row">
+        <a href="CV_2026-03-16_Nadir_BERRAMDANE-2.pdf_20260328_132350_0000.pdf" class="download-btn" download>⬇ Télécharger le CV</a>
+        <button class="preview-btn" onclick="openPDF('CV_Nadir_BERRAMDANE.pdf')">👁 Aperçu du CV</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox image -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="viewer-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- Visionneuse PDF -->
+  <div id="pdf-viewer" onclick="closePDF(event)">
+    <button class="viewer-close" onclick="closePDF()">&times;</button>
+    <iframe id="pdf-frame" src=""></iframe>
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+      if (!event || event.target.id !== 'lightbox-img') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function openPDF(src) {
+      document.getElementById('pdf-frame').src = src;
+      document.getElementById('pdf-viewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePDF(event) {
+      if (!event || event.target.id !== 'pdf-frame') {
+        document.getElementById('pdf-frame').src = '';
+        document.getElementById('pdf-viewer').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeLightbox(); closePDF(); }
+    });
+  </script>
+
+</body>
+</html>

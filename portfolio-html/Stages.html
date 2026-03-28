@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stages</title>
+  <style>
+    :root {
+      --primary: #2F8F98;
+      --secondary: #56C6C6;
+      --dark: #1f2933;
+      --light: #f9fafb;
+      --glass: rgba(255, 255, 255, 0.75);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.18);
+      --radius-xl: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #eef6f7, #ffffff);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 70px 20px 90px;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 0;
+      width: 100%; height: 120px;
+      background: white;
+      border-radius: 100% 100% 0 0;
+    }
+    nav {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+    main {
+      max-width: 950px;
+      margin: -60px auto 80px;
+      padding: 50px 45px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+    h2 {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: var(--primary);
+      position: relative;
+      padding-left: 15px;
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 8px;
+      width: 5px; height: 70%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+    p { margin: 10px 0; font-size: 1.05em; color: #374151; }
+    ul { margin: 15px 0; padding: 0; list-style: none; }
+    li { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #ddd; }
+
+    .stage-card {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .stage-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stage-title {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .stage-meta {
+      font-size: 0.88em;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    /* Galerie */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .gallery img {
+      flex: 1 1 160px;
+      height: 155px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+      cursor: zoom-in;
+      border: 2px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    /* Placeholder confidentiel dans la galerie */
+    .gallery-confidential {
+      flex: 1 1 160px;
+      height: 155px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px dashed #d1d5db;
+    }
+    .gallery-confidential span:first-child { font-size: 2.2em; }
+    .gallery-confidential span:last-child {
+      font-size: 0.65em;
+      font-weight: 700;
+      color: #9ca3af;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Boutons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    a.dl-btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+    a.dl-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: var(--shadow-hover);
+    }
+    button.prev-btn {
+      padding: 8px 18px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button.prev-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex !important; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+      cursor: default;
+    }
+
+    /* Visionneuse PDF */
+    #pdf-viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #pdf-viewer.active { display: flex !important; }
+    #pdf-viewer iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: zoomIn 0.25s ease;
+    }
+
+    .viewer-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10000;
+      line-height: 1;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: -40px 15px 60px; padding: 35px 25px; }
+      nav a { flex: 1 1 100%; text-align: center; }
+      .gallery img, .gallery-confidential { height: 120px; }
+      #pdf-viewer iframe { height: 75vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Stages</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="Page 1.html">BTS SIO</a>
+    <a href="page 2.html">Projet</a>
+    <a href="Stages.html">Stages</a>
+    <a href="page 4.html">Certification</a>
+    <a href="page 3.html">Veille</a>
+    <a href="page 6.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Mes Stages</h1>
+
+    <h2>Rapports de Synthèse</h2>
+    <ul>
+
+      <!-- STAGE 1 : Crazy Park -->
+      <li>
+        <div class="stage-card">
+          <div class="stage-title">Stage 1ère année — Crazy Park</div>
+          <div class="stage-meta">📅 19 mai – 27 juin &nbsp;|&nbsp; 📍 Bonneuil-sur-Marne</div>
+          <p>Stage durant lequel j'ai modifié le <strong>site web</strong> de l'entreprise via l'outil <strong>WordPress</strong>.</p>
+          <div class="gallery">
+            <img src="cazy_par_acceuil_site.jpg" alt="Accueil site Crazy Park" onclick="openLightbox(this)">
+            <img src="themes-wordpress.jpg" alt="Thèmes WordPress" onclick="openLightbox(this)">
+          </div>
+          <div class="btn-row">
+            <a href="rapport de synthése partie technique berramdane nadir.odt" class="dl-btn" download>⬇ Partie technique</a>
+            <a href="rapport de synthése partie entreprise berramdane nadir.odt" class="dl-btn" download>⬇ Partie entreprise</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- STAGE 2 : Tribunal de Créteil -->
+      <li>
+        <div class="stage-card">
+          <div class="stage-title">Stage 2ème année — Tribunal de Créteil</div>
+          <div class="stage-meta">📅 10 novembre – 19 décembre &nbsp;|&nbsp; 📍 Créteil</div>
+          <p>Stage durant lequel j'ai effectué des missions en <strong>maintenance informatique</strong>.</p>
+          <div class="gallery">
+            <img src="tribunal_de_creteil_face.jpg" alt="Façade du Tribunal de Créteil" onclick="openLightbox(this)">
+            <div class="gallery-confidential">
+              <span>🔒</span>
+              <span>Confidentiel</span>
+            </div>
+          </div>
+          <div class="btn-row">
+            <a href="Rapport de stage BERRAMDANE NADIR 2e année.docx" class="dl-btn" download>⬇ Rapport de synthèse</a>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </main>
+
+  <!-- Lightbox image -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="viewer-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- Visionneuse PDF -->
+  <div id="pdf-viewer" onclick="closePDF(event)">
+    <button class="viewer-close" onclick="closePDF()">&times;</button>
+    <iframe id="pdf-frame" src=""></iframe>
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(event) {
+      if (!event || event.target.id !== 'lightbox-img') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    function openPDF(src) {
+      document.getElementById('pdf-frame').src = src;
+      document.getElementById('pdf-viewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePDF(event) {
+      if (!event || event.target.id !== 'pdf-frame') {
+        document.getElementById('pdf-frame').src = '';
+        document.getElementById('pdf-viewer').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeLightbox(); closePDF(); }
+    });
+  </script>
+
+</body>
+</html>

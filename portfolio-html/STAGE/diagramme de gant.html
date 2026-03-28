@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagramme de Gantt - Stage</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+    #visualization {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Diagramme de Gantt - Stage Mai-Juin 2025</h2>
+  <div id="visualization"></div>
+
+  <script>
+    // Création du conteneur de données
+    var container = document.getElementById('visualization');
+
+    // Données des tâches
+    var items = new vis.DataSet([
+      {id: 1, content: 'Page 1 : Conception', start: '2025-05-19', end: '2025-05-22', className: 'design'},
+      {id: 2, content: 'Page 2 : Conception', start: '2025-05-23', end: '2025-05-26', className: 'design'},
+      {id: 3, content: 'Page 3 : Conception', start: '2025-05-27', end: '2025-05-30', className: 'design'},
+      {id: 4, content: 'Page 4 : Conception', start: '2025-05-31', end: '2025-06-03', className: 'design'},
+      {id: 5, content: 'Page 5 : Conception', start: '2025-06-04', end: '2025-06-07', className: 'design'},
+      {id: 6, content: 'Page 6 : Conception', start: '2025-06-08', end: '2025-06-11', className: 'design'},
+      {id: 7, content: 'Intégration des liens', start: '2025-06-12', end: '2025-06-25', className: 'integration'},
+      {id: 8, content: 'Rendu final', start: '2025-06-26', end: '2025-06-27', className: 'final'}
+    ]);
+
+    // Options de visualisation
+    var options = {
+      stack: false,
+      start: '2025-05-15',
+      end: '2025-06-30',
+      editable: false,
+      margin: {
+        item: 10,
+        axis: 5
+      },
+      orientation: 'top',
+      showCurrentTime: false
+    };
+
+    // Création de la timeline
+    var timeline = new vis.Timeline(container, items, options);
+  </script>
+
+  <!-- Styles personnalisés pour les barres -->
+  <style>
+    .vis-item.design {
+      background-color: #00BFFF;
+      border-color: #00BFFF;
+      color: white;
+    }
+
+    .vis-item.integration {
+      background-color: #4169E1;
+      border-color: #4169E1;
+      color: white;
+    }
+
+    .vis-item.final {
+      background-color: #0000CD;
+      border-color: #0000CD;
+      color: white;
+    }
+  </style>
+</body>
+</html>
